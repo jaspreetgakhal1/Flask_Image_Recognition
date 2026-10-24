@@ -1,7 +1,7 @@
 # test_acceptance_happy.py
 
 from io import BytesIO
-import pytest
+
 
 def test_acceptance_successful_upload(client):
     """
@@ -29,7 +29,8 @@ def test_acceptance_successful_upload(client):
 def test_acceptance_valid_large_image(client):
     """
     Test Case: Upload of a Valid Large Image File
-    - Purpose: Check if the system accepts large but valid image files without errors and still provides predictions.
+    - Purpose: Check if the system accepts large but valid image files
+      without errors and still provides predictions.
     - Method:
         - Create a mock large image file by repeating mock image data multiple times.
         - Simulate a POST request to the `/prediction` route with the file.
@@ -42,7 +43,7 @@ def test_acceptance_valid_large_image(client):
     response = client.post(
         "/prediction",
         data={"file": (img_data, img_data.name)},
-        content_type="multipart/form-data"
+        content_type="multipart/form-data",
     )
 
     assert response.status_code == 200
@@ -58,7 +59,9 @@ def test_acceptance_valid_image_size_upload(client):
         - POST the file to the `/prediction` route.
         - Check that the status code is 200 and 'Prediction' exists in the response.
     """
-    img_data = BytesIO(b"valid_image_data_of_large_size" * 1000)  # Simulating a specific size
+    img_data = BytesIO(
+        b"valid_image_data_of_large_size" * 1000
+    )  # Simulating a specific size
     img_data.name = "large_image.jpg"
 
     response = client.post(

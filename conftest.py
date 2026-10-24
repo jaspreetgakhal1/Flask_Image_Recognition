@@ -1,7 +1,7 @@
-
-
 import pytest
+
 from app import app  # This imports the Flask app for testing
+
 
 @pytest.fixture
 def client():
